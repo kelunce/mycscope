@@ -81,7 +81,7 @@ char	*editor, *shell, *lineflag;	/* environment variables */
 char	*home;			/* Home directory */
 BOOL	lineflagafterfile;
 char	*argv0;			/* command name */
-BOOL	compress = YES;		/* compress the characters in the crossref */
+BOOL	compress = NO;		/* compress the characters in the crossref */
 BOOL	dbtruncated;		/* database symbols are truncated to 8 chars */
 int	dispcomponents = 1;	/* file path components to display */
 #if CCS
@@ -604,7 +604,8 @@ cscope: Could not create private temp dir %s\n",
 	if (fileversion >= 8) {
 
 	    /* override these command line options */
-	    compress = YES;
+	    //compress = YES;
+	    compress = NO;
 	    invertedindex = NO;
 
 	    /* see if there are options in the database */
@@ -1011,11 +1012,13 @@ static void
 longusage(void)
 {
 	usage();
+/* no longer support compress
+-c            Use only ASCII characters in the cross-ref file (don't compress).\n\
+ * */
 	fprintf(stderr, "\
 \n\
 -b            Build the cross-reference only.\n\
 -C            Ignore letter case when searching.\n\
--c            Use only ASCII characters in the cross-ref file (don't compress).\n\
 -d            Do not update the cross-reference.\n\
 -e            Suppress the <Ctrl>-e command prompt between files.\n\
 -F symfile    Read symbol reference lines from symfile.\n\

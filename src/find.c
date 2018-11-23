@@ -920,26 +920,26 @@ putline(FILE *output)
 	cp = blockp;
 	do {
 		while ((c = (unsigned)(*cp)) != '\n') {
-			
-			/* check for a compressed digraph */
-			if (c > '\177') {
-				c &= 0177;
-				(void) putc(dichar1[c / 8], output);
-				(void) putc(dichar2[c & 7], output);
-			}
-			/* check for a compressed keyword */
-			else if (c < ' ') {
-				(void) fputs(keyword[c].text, output);
-				if (keyword[c].delim != '\0') {
-					(void) putc(' ', output);
-				}
-				if (keyword[c].delim == '(') {
-					(void) putc('(', output);
-				}
-			}
-			else {
+		// no longer support compress	
+		//	/* check for a compressed digraph */
+		//	if (c > '\177') {
+		//		c &= 0177;
+		//		(void) putc(dichar1[c / 8], output);
+		//		(void) putc(dichar2[c & 7], output);
+		//	}
+		//	/* check for a compressed keyword */
+		//	else if (c < ' ') {
+		//		(void) fputs(keyword[c].text, output);
+		//		if (keyword[c].delim != '\0') {
+		//			(void) putc(' ', output);
+		//		}
+		//		if (keyword[c].delim == '(') {
+		//			(void) putc('(', output);
+		//		}
+		//	}
+		//	else {
 				(void) putc((int) c, output);
-			}
+		//	}
 			++cp;
 		}
 	} while (*(cp + 1) == '\0' && (cp = read_block()) != NULL);
